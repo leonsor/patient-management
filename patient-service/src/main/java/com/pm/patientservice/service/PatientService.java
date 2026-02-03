@@ -2,18 +2,16 @@ package com.pm.patientservice.service;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
-
-import com.pm.patientservice.exception.EmailAlreadyExistsException;
-import com.pm.patientservice.exception.PatientNotFoundException;
 
 import org.springframework.stereotype.Service;
 
 import com.pm.patientservice.PatientMapper;
 import com.pm.patientservice.dto.PatientRequestDTO;
 import com.pm.patientservice.dto.PatientResponseDTO;
+import com.pm.patientservice.exception.EmailAlreadyExistsException;
+import com.pm.patientservice.exception.PatientNotFoundException;
 import com.pm.patientservice.model.Patient;
 import com.pm.patientservice.repository.PatientRepository;
 
@@ -48,13 +46,18 @@ public class PatientService {
 		
 		Patient patient = patientRepository
 				.findById(id).
-				orElseThrow(() -> new PatientNotFoundException("Patient not find with ID:" + id));
-		//Omitted check for email as stated in the example
-//        if(patientRepository.existsByEmail(patientRequestDTO.getEmail())) {
-//            throw new EmailAlreadyExistsException(
-//                    "A patient with this Email already exists: " + patientRequestDTO.getEmail());
-//        }
-		
+				orElseThrow(() -> new PatientNotFoundException("Patient not found with ID:" + id));
+		//Check by me, can implement existsByEmailAndIdNot(String email, UUID id) in PatientRepository
+		String oldEmail = patient.getEmail();
+		String newEmail = patientRequestDTO.getEmail();
+		if(!newEmail.equals(oldEmail)) {
+			// System.out.println("from PatientService - updated patient has different email address, start check in database"); // DEBUG
+	        if(patientRepository.existsByEmail(newEmail)) {
+	            throw new EmailAlreadyExistsException(
+	                    "A patient with this Email already exists: " + patientRequestDTO.getEmail());
+	        }
+		}
+		// System.out.println("from PatientService - updated patient has the same email address"); // DEBUG
 		
 		patient.setName(patientRequestDTO.getName());
 		patient.setAddress(patientRequestDTO.getAddress());

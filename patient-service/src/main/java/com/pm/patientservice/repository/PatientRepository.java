@@ -10,6 +10,9 @@ import com.pm.patientservice.model.Patient;
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, UUID>{
 
+	/** Checks for existing email - must be unique */
     boolean existsByEmail(String email);
+    /** Checks for existing email linked with id, if not the same, returns true*/
+    boolean existsByEmailAndIdNot(String email, UUID id);
 
 }

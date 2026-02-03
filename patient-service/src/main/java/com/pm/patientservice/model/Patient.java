@@ -8,30 +8,33 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "patient")
 public class Patient {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.UUID)
+	@Column(name = "id", updatable = false, nullable = false)
 	private UUID id;
 	
-	@NotNull
+	@Column(name = "name", nullable = false)
 	private String name;
 	
-	@NotNull
 	@Email
-	@Column(unique = true)
+	@NotNull
+	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 	
-	@NotNull
+	@Column(name = "address", nullable = false)
 	private String address;
 	
-	@NotNull
+	@Column(name = "date_of_birth", nullable = false)
 	private LocalDate dateOfBirth;
 	
-	@NotNull
+	@Column(name = "registered_date", updatable = false, nullable = false)
 	private LocalDate registeredDate;
 
 	public UUID getId() {
