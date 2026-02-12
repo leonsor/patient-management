@@ -5,13 +5,11 @@
             "debug": false
         }
     ],
-    "java.configuration.updateBuildConfiguration": "interactive"
-	,
-	"java.nullAnalysis.enabled": true,
+    "java.configuration.updateBuildConfiguration": "automatic",
 	"files.autoSave": "afterDelay",
     "files.autoSaveDelay": 3000,
     "java.compile.nullAnalysis.mode": "automatic",
-    "java.project.sourcePaths": [
-        "billing-service"
-    ]
+    "protobuf.externalLinter.enabled": true,
+    "protobuf.externalLinter.linter": "buf",
+    "protobuf.externalLinter.bufPath": "c:\\Users\\sorok\\AppData\\Roaming\\Code\\User\\globalStorage\\drblury.protobuf-vsc\\bin\\buf.exe"
 }

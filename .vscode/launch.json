@@ -1,5 +1,14 @@
 {
     "configurations": [
+
+        {
+            "type": "java",
+            "name": "Spring Boot-BillingServiceApplication<billing-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.pm.billingservice.BillingServiceApplication",
+            "projectName": "billing-service"
+        },
         {
             "type": "java",
             "name": "Spring Boot-PatientServiceApplication<patient-service>",
