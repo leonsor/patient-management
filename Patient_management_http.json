@@ -1,0 +1,297 @@
+{
+  "version": 6,
+  "entities": [
+    {
+      "entity": {
+        "type": "Project",
+        "id": "0bc55c15-260c-4a2f-b615-6a950c557271",
+        "name": "Patient-Management"
+      },
+      "children": [
+        {
+          "entity": {
+            "type": "Service",
+            "id": "41542761-c39b-4663-b6a6-3840c382e92d",
+            "name": "Billing-service"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "custom": true,
+                  "requestBody": true,
+                  "link": "",
+                  "name": "GRPC"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n\t\"patientId\": \"12334\",\n  \t\"name\": \"John Doe\",\n  \t\"email\": \"john.doe@exapmle.com\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:9001",
+                  "path": "/BillingService/CreateBillingAccount"
+                },
+                "id": "23988a7e-eaf5-46a5-a4d2-b02b3954bbdb",
+                "name": "Create Billing Account",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "3dbc31e5-2360-45af-b333-e613270ea1c4",
+            "name": "Patient-service"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"name\": \"Test Patient 1\",\n  \"email\": \"patient1@example.com\",\n  \"address\": \"999 Rodeo Drive, Whitewater\",\n  \"dateOfBirth\": \"1975-06-15\",\n  \"registeredDate\": \"2025-06-15\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:4000",
+                  "path": "/patients"
+                },
+                "id": "980576c3-0277-4a6b-88bc-9b4339b1eab9",
+                "name": "Create new Patient",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"name\": \"Test Patient 2\",\n  \"email\": \"patient1@example.com\",\n  \"address\": \"001 Rodeo Drive, Whitewater\",\n  \"dateOfBirth\": \"1979-05-19\",\n  \"registeredDate\": \"2025-09-21\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:4000",
+                  "path": "/patients"
+                },
+                "id": "9b22d0f7-c5de-425d-a246-d91b2370b03c",
+                "name": "Create new Patient - Error: No email",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"name\": \"Test Patient 3\",\n  \"email\": \"patient3@example.com\",\n  \"address\": \"999 Rodeo Drive, Whitewater\",\n  \"dateOfBirth\": \"1975-06-15\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:4000",
+                  "path": "/patients"
+                },
+                "id": "2ad6ac31-455a-40e2-8e2e-8031e9cfa7f2",
+                "name": "Create new Patient - error registeredDate missing",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+                  "name": "DELETE"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:4000",
+                  "path": "/patients/123e4567-e89b-12d3-a456-426614174000"
+                },
+                "id": "43473d72-f5be-495c-96d2-b87af231804d",
+                "name": "Delete patient with id",
+                "headers": []
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:4000",
+                  "path": "/patients"
+                },
+                "id": "f5dbc555-17e0-4242-be6a-64f21ef317b3",
+                "name": "Get all patients",
+                "headers": []
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+                  "name": "PUT"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n\"name\": \"John Doe\",\n\"email\": \"john.doe@example.com\",\n\"address\": \"123 Main St, Springfield Updated\",\n\"dateOfBirth\": \"1985-06-15\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:4000",
+                  "path": "/patients/123e4567-e89b-12d3-a456-426614174000"
+                },
+                "id": "74959538-4310-4466-bca1-afb6073acdcf",
+                "name": "Update Existing Patient",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
