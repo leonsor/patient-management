@@ -16,12 +16,12 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_SQL_INIT_MODE=always
       - SPRING_JPA_SHOW_SQL=true
-    develop: 
-      watch:
-      - action: sync
-        path: patient-service/src/.
-      - action: rebuild
-        path: patient-service/pom.xml
+    # develop: 
+    #   watch:
+    #   - action: sync
+    #     path: patient-service/src/.
+    #   - action: rebuild
+    #     path: patient-service/pom.xml
       
   billing-service:
     # image: billing-service:latest

@@ -8,7 +8,9 @@ RUN mvn dependency:go-offline -B
 
 COPY src ./src
 
-RUN mvn clean package
+RUN mvn clean 
+RUN mvn generate-sources
+RUN mvn package
 
 FROM eclipse-temurin:21-jdk-noble AS runner
 

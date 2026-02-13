@@ -1,7 +1,8 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "billing";
+option java_package = "com.pm.patientservice.grpc";
+option java_outer_classname = "BillingServiceOuterClass";
 
 /**
  * Billing service definition.
