@@ -1,7 +1,7 @@
 {
     "maven.terminal.favorites": [
         {
-            "command": "clean validate",
+            "command": "clean compile",
             "debug": false
         }
     ],
