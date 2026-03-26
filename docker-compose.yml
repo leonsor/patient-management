@@ -19,6 +19,8 @@ services:
       - BILLING_SERVICE_ADDRESS=billing-service
       - BILLING_SERVICE_GRPC_PORT=9001
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    depends_on:
+      - kafka
     # develop: 
     #   watch:
     #   - action: sync
@@ -34,6 +36,10 @@ services:
     ports:
       - 4001:4001
       - 9001:9001
+    depends_on:
+      - kafka
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     # networks:
     #    - internal
       
@@ -70,7 +76,7 @@ services:
       - 9092:9092
       - 9094:9094
     environment:
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       # - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
