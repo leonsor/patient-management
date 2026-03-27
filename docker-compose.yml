@@ -43,6 +43,20 @@ services:
     # networks:
     #    - internal
       
+  analytics-service:
+    build: analytics-service/.
+    # image: analytics-service:latest
+    container_name: analytics-service
+    restart: unless-stopped
+    ports:
+       - 4002:4002
+    depends_on:
+       - kafka
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    # networks:
+    #     - internal
+
   patient-service-db:
     image: postgres:14
     container_name: patient-service-db
