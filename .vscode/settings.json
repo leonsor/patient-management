@@ -12,5 +12,11 @@
     "protobuf.externalLinter.enabled": true,
     "protobuf.externalLinter.linter": "buf",
     "protobuf.externalLinter.bufPath": "c:\\Users\\sorok\\AppData\\Roaming\\Code\\User\\globalStorage\\drblury.protobuf-vsc\\bin\\buf.exe",
-    "kafka.clusters.selected": "PatientManagement-bG9jYWxob3N0OjkwOTI"
+    "kafka.clusters.selected": "PatientManagement-bG9jYWxob3N0OjkwOTI",
+    "java.project.sourcePaths": [
+        "billing-service",
+        "patient-service",
+        "analytics-service",
+        "api_gateway"
+    ]
 }
