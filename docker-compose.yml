@@ -5,8 +5,9 @@ services:
     # image: patient-service:latest
     container_name: patient-service
     restart: unless-stopped
-    ports:
-      - 4000:4000
+    # port removed after adding the api-gateway
+    # ports:
+    #   - 4000:4000
     # networks:
     #   - internal
     environment:
@@ -98,4 +99,12 @@ services:
       - KAFKA_CFG_NODE_ID=0
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
     
+  api-gateway:
+    build: api-gateway/.
+    container_name: api-gateway
+    restart: unless-stopped
+    ports:
+      - 4004:4004
+    depends_on:
+      - patient-service
 
