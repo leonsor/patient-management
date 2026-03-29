@@ -22,13 +22,22 @@ services:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     depends_on:
       - kafka
-    # develop: 
-    #   watch:
-    #   - action: sync
-    #     path: patient-service/src/.
-    #   - action: rebuild
-    #     path: patient-service/pom.xml
-      
+
+  auth-service:
+    build: auth-service/.
+    container_name: auth-service
+    restart: unless-stopped
+    ports:
+       - 4005:4005 # close this port after testing
+    depends_on:
+       - auth-service-db
+    environment:
+       - SPRING_DATASOURCE_URL=jdbc:postgresql://auth-service-db:5432/db
+       - SPRING_DATASOURCE_USERNAME=admin_user
+       - SPRING_DATASOURCE_PASSWORD=password
+       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+       - SPRING_SQL_INIT_MODE=always
+       - SPRING_JPA_SHOW_SQL=true
   billing-service:
     # image: billing-service:latest
     build: billing-service/.
@@ -73,6 +82,20 @@ services:
       POSTGRES_DB: db
       POSTGRES_PASSWORD: password
 
+  auth-service-db:
+    image: postgres:14
+    container_name: auth-service-db
+    restart: unless-stopped
+    volumes:
+      - ./db_auth:/var/lib/postgresql/data
+    ports:
+      - 5001:5432
+    # networks:
+    #   - internal
+    environment:
+      POSTGRES_USER: admin_user
+      POSTGRES_DB: db
+      POSTGRES_PASSWORD: password
   adminer:
     image: adminer
     restart: unless-stopped
@@ -82,6 +105,7 @@ services:
     #   - internal
     depends_on:
       - patient-service-db
+      - auth-service-db
 
   kafka:
     image: soldevelo/kafka:latest
