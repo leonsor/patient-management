@@ -38,6 +38,7 @@ services:
        - SPRING_JPA_HIBERNATE_DDL_AUTO=update
        - SPRING_SQL_INIT_MODE=always
        - SPRING_JPA_SHOW_SQL=true
+       - JWT_SECRET=RdKPaIWHY8hBWbFEelHnLcCywiutE4UGRJvTVkI1b7Q=
   billing-service:
     # image: billing-service:latest
     build: billing-service/.
