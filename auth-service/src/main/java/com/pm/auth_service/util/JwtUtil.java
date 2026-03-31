@@ -5,11 +5,15 @@ import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
 
+import javax.crypto.SecretKey;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 
 @Component
 public class JwtUtil {
@@ -26,8 +30,22 @@ public class JwtUtil {
               .subject(email)
               .claim("role", role)
               .issuedAt(new Date())
-              .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 30)) // 30 days
+              .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
               .signWith(secretKey)
               .compact();
+    }
+
+    public void validateToken(String token) {
+        try {
+            Jwts.parser().verifyWith((SecretKey) secretKey)
+            .build()
+            .parseSignedClaims(token);
+        } catch (SignatureException e) {
+            System.out.println("Invalid JWT Signature"); // Debugging only
+            throw new JwtException("Invalid JWT Signature");
+        } catch (JwtException e) {
+            System.out.println("Invalid JWT Token"); // Debugging only
+            throw new JwtException("Invalid JWT Token");
+        }
     }
 }
